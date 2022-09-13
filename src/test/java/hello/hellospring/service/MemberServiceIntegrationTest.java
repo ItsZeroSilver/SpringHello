@@ -1,41 +1,34 @@
-package service;
+package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.service.MemberService;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
-    MemberRepository memberRepository;
-    MemberService memberService;
-
-    @BeforeEach
-    public void beforeEach(){
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
+@SpringBootTest
+@Transactional//Test 실행할때 transcation & rollback
+class MemberServiceIntegrationTest {
+    @Autowired MemberRepository memberRepository;
+    @Autowired MemberService memberService;
 
     @Test
     public void join() throws Exception{
         Member member = new Member();
-        member.setName("spring");
+        member.setName("spring22");
 
         Long saveId = memberService.join(member);
 
-        Member findMember = memberRepository.findbyId(saveId).get();
+        Member findMember = memberRepository.findById(saveId).get();
 //        assertThat(findMember).isSameAs(member);
         assertEquals(member.getName(), findMember.getName());
     }

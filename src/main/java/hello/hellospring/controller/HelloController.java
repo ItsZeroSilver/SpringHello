@@ -1,8 +1,5 @@
 package hello.hellospring.controller;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,10 +41,15 @@ public class HelloController {
         // JsonConverter가 동작(기본 객체 처리)
     }
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
     static class Hello{
         private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

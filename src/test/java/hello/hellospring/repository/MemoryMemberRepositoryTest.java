@@ -25,7 +25,7 @@ class MemoryMemberRepositoryTest {
         //when
         memberRepository.save(member);
         //then
-        Member result = memberRepository.findbyId(member.getId()).get();
+        Member result = memberRepository.findById(member.getId()).get();
         assertThat(result).isEqualTo(member);
     }
 
@@ -41,7 +41,7 @@ class MemoryMemberRepositoryTest {
         memberRepository.save(member2);
 
         //when
-        Member result = memberRepository.findbyName("Spring1").get();
+        Member result = memberRepository.findByName("Spring1").get();
 
         //then
         assertThat(result).isSameAs(member1);

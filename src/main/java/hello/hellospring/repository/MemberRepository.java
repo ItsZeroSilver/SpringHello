@@ -11,13 +11,12 @@ public interface MemberRepository {
     Member save(Member member);
 
     //아이디 찾기
-    Optional<Member> findbyId(Long id);
+    Optional<Member> findById(Long id);
 
     //이름 찾기
-    Optional<Member> findbyName(String name);
+    Optional<Member> findByName(String name);
 
     //전부 찾기
     List<Member> findAll();
 
-    void clearStore();
 }
